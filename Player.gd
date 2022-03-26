@@ -16,15 +16,18 @@ var rotation_helper
 
 var MOUSE_SENSITIVITY = 0.05
 
+
 func _ready():
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
+
 
 func process_input(delta):
 
@@ -67,6 +70,7 @@ func process_input(delta):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# ----------------------------------
 
+
 func process_movement(delta):
 	dir.y = 0
 	dir = dir.normalized()
@@ -89,6 +93,7 @@ func process_movement(delta):
 	vel.x = hvel.x
 	vel.z = hvel.z
 	vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
+
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
