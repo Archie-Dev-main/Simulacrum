@@ -209,6 +209,10 @@ _global_script_class_icons={
 config/name="Simulacrum"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/qodot/plugin.cfg" )
+
 [input]
 
 movement_forward={
