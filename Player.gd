@@ -1,15 +1,15 @@
 extends KinematicBody
 
-const GRAVITY = -24.8
+export(float) var GRAVITY : float = -24.8
 var vel = Vector3()
-const MAX_SPEED = 20
-const JUMP_SPEED = 18
-const ACCEL = 4.5
+export(float) var MAX_SPEED : float = 20
+export(float) var JUMP_SPEED : float = 18
+export(float) var ACCEL : float = 4.5
 
 var dir = Vector3()
 
-const DEACCEL= 16
-const MAX_SLOPE_ANGLE = 40
+export(float) var DEACCEL : float = 16
+export(float) var MAX_SLOPE_ANGLE : float = 40
 
 var camera
 var rotation_helper
