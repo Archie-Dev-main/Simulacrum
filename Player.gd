@@ -1,5 +1,6 @@
 extends KinematicBody
 
+
 export(float) var GRAVITY : float = -24.8
 var vel = Vector3()
 export(float) var MAX_SPEED : float = 20
