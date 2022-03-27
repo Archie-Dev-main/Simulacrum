@@ -207,6 +207,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Simulacrum"
+run/main_scene="res://scenes/demo_level.tscn"
 config/icon="res://icon.png"
 
 [autoload]
