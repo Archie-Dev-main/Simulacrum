@@ -1,7 +1,7 @@
 extends Area
 
 
-var speed = 30
+var speed = 15
 
 
 # Called when the node enters the scene tree for the first time.

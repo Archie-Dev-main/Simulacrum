@@ -3,8 +3,6 @@ extends Spatial
 
 var key = false
 var open_door = false
-var num_turrets_dead = 0
-#onready var endscreen = preload("res://scenes/EndScreen.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,17 +17,9 @@ func _physics_process(delta):
 		$Door.translation.y += 30 * delta
 	
 	if Input.is_action_just_pressed("win_game"):
-		$turret.health = 0
-		$turret2.health = 0
+		$Player.shotgun_damage = 1000
 	
-	if $turret.health <= 0:
-		num_turrets_dead += 1
-		$turret.queue_free()
-	if $turret2.health <= 0:
-		num_turrets_dead += 1
-		$turret2.queue_free()
-	
-	if num_turrets_dead > 1:
+	if GlobalVariables.num_turrets_dead == 2:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_tree().change_scene("res://scenes/EndScreen.tscn")
 

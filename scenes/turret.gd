@@ -6,6 +6,7 @@ onready var muzzle_flash = $Turn_Rod/Head/Barrel/Muzzle_Flash
 onready var muzzle_flash_timer = $Turn_Rod/Head/Barrel/muzzle_flash_timer
 onready var rocket = preload("res://scenes/rocket.tscn")
 var health = 500
+var dead = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,6 +22,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
+	if health <= 0:
+		GlobalVariables.num_turrets_dead += 1
+		queue_free()
 	if player:
 		$Turn_Rod.look_at(player.translation, Vector3.UP)
 		#$Turn_Rod.rotation.x = clamp(rotation.x, 0, 0)

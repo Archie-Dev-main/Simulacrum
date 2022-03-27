@@ -29,6 +29,7 @@ surfaces/0 = {
 }
 
 [node name="missile" type="Spatial"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
 
 [node name="Booster" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
