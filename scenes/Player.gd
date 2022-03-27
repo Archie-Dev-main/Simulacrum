@@ -38,6 +38,7 @@ var can_shoot = false
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+# warning-ignore:return_value_discarded
 	$Rotation_Helper/weapons/shotgun/attack_timer.connect("timeout", self, "can_shoot")
 	
 	for _i in range(10):
@@ -144,6 +145,7 @@ func death():
 	var _reload = get_tree().reload_current_scene()
 
 
+# warning-ignore:function_conflicts_variable
 func can_shoot():
 	can_shoot = true
 

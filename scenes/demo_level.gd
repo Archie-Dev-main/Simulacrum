@@ -7,7 +7,9 @@ var open_door = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+# warning-ignore:return_value_discarded
 	$key.connect("body_entered", self, "key_collected")
+# warning-ignore:return_value_discarded
 	$Door/Area.connect("body_entered", self, "use_door")
 
 
@@ -21,6 +23,7 @@ func _physics_process(delta):
 	
 	if GlobalVariables.num_turrets_dead == 2:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+# warning-ignore:return_value_discarded
 		get_tree().change_scene("res://scenes/EndScreen.tscn")
 
 
