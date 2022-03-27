@@ -1,7 +1,7 @@
 extends Spatial
 
 
-export(float) var lifetime : float = 10
+export(float) var lifetime : float = 0.1
 var timer = Timer.new()
 
 

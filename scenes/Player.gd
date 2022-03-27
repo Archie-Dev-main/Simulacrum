@@ -31,22 +31,29 @@ var selected_weapon = 0
 var MOUSE_SENSITIVITY = 0.05
 var rng = RandomNumberGenerator.new()
 
+var first_shot = true
+var can_shoot = false
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	$Rotation_Helper/weapons/shotgun/attack_timer.connect("timeout", self, "can_shoot")
 	
 	for _i in range(10):
 		rng.randomize()
 		var raycast = RayCast.new()
 		raycast.enabled = true
 		raycast.cast_to = Vector3(rng.randf_range(-spread, spread), rng.randf_range(-spread, spread), bullet_max_dist)
-		print(raycast.cast_to)
 		shotgun_shot_point.add_child(raycast)
 
 
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
+	
+	if health <= 0:
+		death()
 	
 	if Input.is_action_just_pressed("primary_fire"):
 		if selected_weapon == 0:
@@ -137,18 +144,27 @@ func death():
 	var _reload = get_tree().reload_current_scene()
 
 
+func can_shoot():
+	can_shoot = true
+
+
 func fire_shotgun():
-	var decal_instance
+	if first_shot or can_shoot:
+		first_shot = false
+		var decal_instance
+	
+		for i in shotgun_shot_point.get_children():
+			rng.randomize()
+			i.cast_to.x = rng.randf_range(-spread, spread)
+			i.cast_to.y = rng.randf_range(-spread, spread)
 		
-	for i in shotgun_shot_point.get_children():
-		rng.randomize()
-		i.cast_to.x = rng.randf_range(-spread, spread)
-		i.cast_to.y = rng.randf_range(-spread, spread)
+			decal_instance = decal.instance()
 		
-		print("i raycast cast_to: " + str(i.cast_to))
-		
-		decal_instance = decal.instance()
-		
-		if i.is_colliding():
-			get_parent().get_child(0).add_child(decal_instance)
-			decal_instance.global_transform.origin = i.get_collision_point()
+			if i.is_colliding():
+				get_parent().get_child(0).add_child(decal_instance)
+				decal_instance.global_transform.origin = i.get_collision_point()
+				if i.get_collider().is_in_group("robot"):
+					i.get_collider().damage(shotgun_damage)
+			
+			can_shoot = false
+			$Rotation_Helper/weapons/shotgun/attack_timer.start(0.5)

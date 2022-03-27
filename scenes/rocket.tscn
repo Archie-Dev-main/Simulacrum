@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/missile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/rocket.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.2
+height = 0.2
+
+[node name="rocket" type="Area"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="missile" parent="." instance=ExtResource( 1 )]
